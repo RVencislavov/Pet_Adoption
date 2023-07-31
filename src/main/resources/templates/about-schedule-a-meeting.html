@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Schedule A Meeting</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+
+    <style>
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 40px 20px;
+    }
+
+    h1 {
+        font-size: 36px;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    p {
+        font-size: 18px;
+        line-height: 1.6;
+        margin-bottom: 20px;
+    }
+
+    .button-container {
+        text-align: center;
+        margin-top: 40px;
+    }
+
+    .btn-custom {
+        background-color: #ffc107;
+        color: #000;
+        font-size: 20px;
+        padding: 10px 20px;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-custom:hover {
+        background-color: #ffbc00;
+    }
+
+    .how-it-works {
+        margin-bottom: 40px;
+    }
+
+    .how-it-works ol {
+        list-style-type: none;
+        counter-reset: step-counter;
+        padding-left: 0;
+    }
+
+    .how-it-works li {
+        position: relative;
+        padding-left: 40px;
+        margin-bottom: 20px;
+    }
+
+    .how-it-works li:before {
+        content: counter(step-counter);
+        counter-increment: step-counter;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+        background-color: #ffc107;
+        color: #000;
+        font-weight: bold;
+        border-radius: 50%;
+    }
+
+    .how-it-works li strong {
+        font-weight: bold;
+    }
+
+    .how-it-works li p {
+        margin-top: 10px;
+    }
+
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style="height: 60px;">
+    <a class="navbar-brand" href="#">
+        <img src="/img/Logo2.png" alt="Logo" height="30" width="30" class="mr-2">
+        <span style="font-size: 20px;">Paw Finder</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/home}">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/shelters/list}">Pet Adoption</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Lost and Found</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Veterinary Clinics</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/shelters">Shelters</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/animals/showAll">View Animals</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav navbar-nav-buttons">
+            <li class="nav-item">
+                <a class="nav-link" href="/users/register">Register</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/users/login">Login</a>
+            </li>
+            <li class="nav-item dropdown show">
+                <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <div id="profilePicture" class="profile-picture"></div>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="profileDropdown">
+                    <a class="dropdown-item" href="#">Edit profile</a>
+                    <a class="dropdown-item" href="#">Logout</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="container">
+    <h1>Schedule a Shelter Visit</h1>
+    <p>Welcome to the Schedule a Shelter Visit feature of our Pet Adoption web application. This feature allows you to
+        schedule a visit to a shelter of your choice, where you can interact with potential pets and find your perfect
+        companion. We have made the process simple and convenient to ensure a smooth and enjoyable experience for
+        you.</p>
+
+    <div class="how-it-works">
+        <h3>How it Works:</h3>
+
+        <ol>
+            <li>
+                <strong>Choose a Shelter:</strong> To begin, click on the "Shelters" button below to explore the
+                shelters available in your preferred city. Each shelter offers a unique selection of dogs and cats
+                waiting for their forever homes.
+            </li>
+            <li>
+                <strong>Browse Available Pets:</strong> Once you have selected a shelter, you will be able to view
+                detailed information about the dogs and cats available for adoption. This includes their photos, age,
+                size, and personality traits. Take your time to browse through the listings and find a pet that
+                resonates with you.
+            </li>
+            <li>
+                <strong>Select a Pet:</strong> When you find a pet you are interested in, click on their profile to
+                learn more about them. Read their story and get a better understanding of their needs and compatibility
+                with your lifestyle. If you feel a connection, it's time to schedule a visit!
+            </li>
+            <li>
+                <strong>Schedule a Visit:</strong> On the pet's profile page, you will find a "Schedule Visit" button.
+                Click on it to proceed with scheduling a visit to the shelter. You will be prompted to choose a date and
+                time that works best for you. Once you have selected a suitable slot, confirm your visit.
+            </li>
+            <li>
+                <strong>Confirmation and Reminders:</strong> After scheduling your visit, you will receive a
+                confirmation email with the details of your appointment. We recommend adding the visit to your personal
+                calendar to avoid any conflicts. Additionally, we will send you reminders closer to the scheduled date,
+                ensuring that you don't miss your opportunity to meet your potential pet.
+            </li>
+            <li>
+                <strong>Visit the Shelter:</strong> On the day of your scheduled visit, make sure to arrive at the
+                shelter on time. Our staff will be ready to assist you and guide you through the process. Take this
+                opportunity to interact with the pet, ask any questions you may have, and determine if they are the
+                right fit for you and your family.
+            </li>
+        </ol>
+    </div>
+
+    <div class="button-container">
+        <a href="/shelters/list" class="btn btn-custom">Explore Shelters</a>
+    </div>
+
+    <h4 style="text-align: center; margin-top: 40px;">Start Your Journey</h4>
+
+    <p style="text-align: center; margin-top: 20px;">We hope this feature helps you in your search for the perfect pet.
+        If you have any further questions or need assistance, please don't hesitate to contact our support team. Happy
+        pet adoption!</p>
+</div>
+
+</div>
+<footer class="text-white text-center py-3" style="height: 0vh;">
+    <div style="background-color: white; color: black;">
+        &copy; 2023 Paw Finder. All rights reserved.
+    </div>
+</footer>
+
+</body>
+</html>

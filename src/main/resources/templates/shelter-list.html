@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paw Finder - Shelter List</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <style>
+        body {
+            background-color: #E3DAC9;
+        }
+
+        .navbar {
+            background-color: #FAFAD2;
+        }
+
+        .navbar-brand {
+            color: #343a40;
+        }
+
+        .navbar-brand img {
+            height: 30px;
+            width: 30px;
+            margin-right: 5px;
+        }
+
+        .navbar-nav .nav-link {
+            color: #343a40;
+        }
+
+        .header-img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 30px;
+        }
+
+         .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+             background-color: #fff;
+        }
+
+        .table th,
+        .table td {
+            padding: 1rem;
+            border-top: none;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .table thead th {
+            background-color: #f5f5f5;
+            border-top: none;
+            border-bottom: 2px solid #dee2e6;
+        }
+
+        .table tbody tr:hover {
+          background-color: #E3DAC9;
+        color: #fff;
+        }
+
+        .table tbody td {
+            vertical-align: middle;
+        }
+
+
+        a.edit-link {
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background-color: #b08d57;
+            border-color: #b08d57;
+        }
+
+        .btn-primary:hover {
+            background-color: #856b40;
+            border-color: #856b40;
+        }
+
+
+        .btn-success {
+            background-color: #b08d57;
+            border-color: #b08d57;
+            color: #fff;
+        }
+
+        .btn-success:hover {
+            background-color: #856b40;
+            border-color: #856b40;
+        }
+
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style="height: 60px;">
+    <a class="navbar-brand" href="#">
+        <img src="/img/Logo2.png" alt="Logo" height="30" width="30" class="mr-2">
+        <span style="font-size: 20px;">Paw Finder</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/shelters/list}">Pet Adoption</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Lost and Found</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/showMap}">Veterinary Clinics</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/shelters">Shelters</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/animals/showAll">View Animals</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/users">Users</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav navbar-nav-buttons">
+            <li class="nav-item">
+                <a class="nav-link" href="/users/register">Register</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/users/login">Login</a>
+            </li>
+            <li class="nav-item dropdown show">
+                <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <div id="profilePicture" class="profile-picture"></div>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="profileDropdown">
+                    <a class="dropdown-item" href="#">Edit profile</a>
+                    <a class="dropdown-item" href="#">Logout</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+    <h1 class="text-center" style="color: #856b40;">Shelter List</h1>
+    <a th:href="@{/shelters/add}" class="btn btn-success">Add New Shelter</a>
+    <table class="table">
+        <thead class="thead-light">
+        <tr>
+            <th>Name</th>
+            <th>City</th>
+            <th>Address</th>
+            <th>Email</th>
+            <th>Edit</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="shelter : ${shelters}">
+            <td th:text="${shelter.shelterName}"></td>
+            <td th:text="${shelter.shelterCity}"></td>
+            <td th:text="${shelter.shelterAddress}"></td>
+            <td th:text="${shelter.shelterEmail}"></td>
+            <td><a th:href="@{'/shelters/' + ${shelter.shelterID} + '/edit'}" class="edit-link">Edit</a></td>
+        </tr>
+
+        </tbody>
+    </table>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

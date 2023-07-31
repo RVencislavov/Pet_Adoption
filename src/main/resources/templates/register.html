@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>User Registration</title>
+    <style>
+    body {
+      background: linear-gradient(to bottom, #dcb05e, #e8dca2);
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .form-container {
+      width: 30%;
+      margin: 50px auto 0;
+      background-color: rgba(255, 255, 255, 0.7);
+      padding: 15px;
+      border-radius: 40px;
+      box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .logo {
+      width: 110px;
+      height: 110px;
+      margin-bottom: 0px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      font-weight: bold;
+      color: #4a4a4a;
+      margin-bottom: 5px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 20px;
+      background-color: #f5f5f5;
+      color: #4a4a4a;
+      box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.1);
+      box-sizing: border-box;
+      margin-top: 1px;
+      margin-bottom: 1px;
+    }
+
+    .form-group input:focus {
+      outline: none;
+      background-color: #e9e9e9;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      background-color: #dcb05e;
+      color: #fff;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background-color: #4a2b10;
+    }
+
+    .btn:active {
+      transform: translateY(1px);
+    }
+
+    .form-container {
+      transform: scale(0.95);
+      transition: transform 0.3s;
+    }
+
+    .form-container:hover {
+      transform: scale(0.96);
+    }
+
+    .error-message {
+      color: red;
+      font-size: 12px;
+    }
+
+    .already-user {
+      font-size: 12px; /* Adjust the font size as desired */
+    }
+
+    .social-login {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+
+    .social-login__google,
+    .social-login__facebook {
+      width: 48%;
+    }
+
+    .social-login__link {
+      align-items: center;
+      justify-content: center;
+      background-color: #f8f3e2;
+      border-radius: 4px;
+      padding: 10px;
+      text-decoration: none;
+      color: #333;
+      transition: background-color 0.3s;
+    }
+
+    .social-login__link img {
+      width: 20px;
+      margin-right: 10px;
+    }
+
+    .social-login__link:hover {
+      background-color: #f5f5f5;
+    }
+
+
+    </style>
+</head>
+<body>
+<div class="form-container">
+    <img class="logo" src="/img/Logo.png" alt="Logo">
+    <h2>Registration</h2>
+    <form th:action="@{/users/register}" th:object="${user}" method="post">
+        <!-- Form fields -->
+        <div class="form-group">
+            <label for="userFirstName">First Name</label>
+            <input id="userFirstName" th:field="*{userFirstName}" type="text" placeholder="Enter First Name" required
+                   pattern=".{3,}" title="Minimum 3 characters">
+        </div>
+        <div class="form-group">
+            <label for="userLastName">Last Name</label>
+            <input id="userLastName" th:field="*{userLastName}" type="text" placeholder="Enter Last Name" required
+                   pattern=".{3,}" title="Minimum 3 characters">
+        </div>
+        <div class="form-group">
+            <label for="userEmail">Email</label>
+            <input id="userEmail" th:field="*{userEmail}" type="email" placeholder="Enter Email" required>
+        </div>
+        <div class="form-group">
+            <label for="userPhone">Phone Number</label>
+            <input id="userPhone" th:field="*{userPhone}" type="text" placeholder="Enter Phone Number" required>
+            <div id="phoneError" class="error-message"></div>
+        </div>
+        <div class="form-group">
+            <label for="userPassword">Password</label>
+            <input id="userPassword" th:field="*{userPassword}" type="password" placeholder="Enter Password" required>
+            <div id="passwordRequirements" class="error-message"></div>
+        </div>
+
+        <div class="form-group">
+            <label for="confirmPassword">Confirm Password</label>
+            <input id="confirmPassword" type="password" placeholder="Confirm Password" required>
+            <div id="confirmPasswordError" class="error-message"></div>
+        </div>
+        <button type="submit" class="btn">Register</button>
+    </form>
+    <p class="already-user">Already a user? <a href="/users/login">Login</a></p>
+    <div class="social-login">
+        <div class="social-login__google">
+            <a th:href="@{/oauth2/authorization/google}" class="social-login__link">
+                <img src="/img/google-icon.png" alt="Google">
+            </a>
+        </div>
+        <div class="social-login__facebook">
+            <a th:href="@{/oauth2/authorization/facebook}" class="social-login__link">
+                <img src="/img/facebook-icon.png" alt="Facebook">
+            </a>
+        </div>
+    </div>
+</div>
+
+<script th:inline="javascript">
+  document.addEventListener('DOMContentLoaded', function() {
+    var passwordInput = document.getElementById('userPassword');
+    var confirmPasswordInput = document.getElementById('confirmPassword');
+    var confirmPasswordError = document.getElementById('confirmPasswordError');
+
+    confirmPasswordInput.addEventListener('input', function() {
+      var password = passwordInput.value;
+      var confirmPassword = confirmPasswordInput.value;
+
+      if (password !== confirmPassword) {
+        confirmPasswordError.textContent = 'Passwords do not match.';
+      } else {
+        confirmPasswordError.textContent = '';
+      }
+    });
+
+    var passwordRequirements = document.getElementById('passwordRequirements');
+
+    passwordInput.addEventListener('input', function() {
+      var password = passwordInput.value;
+
+      var requirements = [];
+      if (!/[a-z]/.test(password)) {
+        requirements.push('at least 1 lowercase letter');
+      }
+      if (!/[A-Z]/.test(password)) {
+        requirements.push('at least 1 uppercase letter');
+      }
+      if (!/[0-9]/.test(password)) {
+        requirements.push('at least 1 digit');
+      }
+      if (!/[^A-Za-z0-9]/.test(password)) {
+        requirements.push('at least 1 special symbol');
+      }
+      if (password.length < 6 || password.length > 100) {
+        requirements.push('between 6 and 100 characters');
+      }
+
+      if (requirements.length === 0) {
+        passwordRequirements.textContent = '';
+      } else {
+        passwordRequirements.innerHTML = 'Password must contain: <ul>';
+        requirements.forEach(function(req) {
+          passwordRequirements.innerHTML += '<li>' + req + '</li>';
+        });
+        passwordRequirements.innerHTML += '</ul>';
+      }
+    });
+  });
+
+
+</script>
+</body>
+</html>

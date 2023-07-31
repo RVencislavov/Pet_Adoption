@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Paw Finder - Add Animal</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <style>
+        body {
+            background: #f2f2f2;
+        }
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            margin-top: 50px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 4px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+        }
+        .container h1 {
+            margin-bottom: 20px;
+        }
+
+
+    </style>
+
+</head>
+<body>
+<div class="container">
+    <h1>Add Animal</h1>
+
+    <form th:action="@{/animals/add}" th:object="${animal}" th:method="post" enctype="multipart/form-data">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+
+        <div class="form-group">
+            <label for="animalName">Name:</label>
+            <input type="text" id="animalName" name="animalName" class="form-control" th:field="*{animalName}">
+        </div>
+
+        <div class="form-group">
+            <label for="animalSpecies">Species:</label>
+            <select id="animalSpecies" name="animalSpecies" class="form-control" th:field="*{animalSpecies}">
+                <option value="DOG">Dog</option>
+                <option value="CAT">Cat</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="animalGender">Sex:</label>
+            <select id="animalGender" name="animalGender" class="form-control" th:field="*{animalGender}">
+                <option value="MALE">Male</option>
+                <option value="FEMALE">Female</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="animalAge">Age:</label>
+            <input type="number" id="animalAge" name="animalAge" class="form-control" th:field="*{animalAge}" min="0">
+        </div>
+
+        <div class="form-group">
+            <label for="animalSize">Size Category:</label>
+            <select id="animalSize" name="animalSize" class="form-control" th:field="*{animalSize}">
+                <option value="SMALL">Small</option>
+                <option value="MEDIUM">Medium</option>
+                <option value="LARGE">Large</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="shelterName">Shelter Name:</label>
+            <input type="text" id="shelterName" name="shelterName" class="form-control" th:field="*{shelterName}">
+        </div>
+
+        <div class="form-group">
+            <label for="animalCharacteristics">Characteristics:</label>
+            <textarea id="animalCharacteristics" name="animalCharacteristics" class="form-control"
+                      th:field="*{animalCharacteristics}"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="animalPhoto">Photos:</label>
+            <input type="file" id="animalPhoto" name="animalPhoto" class="form-control" multiple>
+            <small id="photoHelp" class="form-text text-muted">Select one or multiple photos to upload.</small>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Add</button>
+    </form>
+</div>
+
+<footer class="text-white text-center py-3" style="height: 0vh;">
+    <div style="background-color: white; color: black;">
+        &copy; 2023 Paw Finder. All rights reserved.
+    </div>
+</footer>
+
+</body>
+</html>
+
+

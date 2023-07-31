@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Shelter</title>
+
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+
+    <style>
+    body {
+      padding: 1em;
+      background: #f8f9fa;
+      font-family: Arial, sans-serif;
+    }
+
+    .form-container {
+      max-width: 500px;
+      margin: 2em auto;
+      background: #fff;
+      padding: 2em;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-container h2 {
+      margin-bottom: 1em;
+    }
+
+    .form-group {
+      margin-bottom: 1.5em;
+    }
+
+    .form-group label {
+      font-weight: bold;
+    }
+
+    .btn-primary {
+      font-size: 1.2em;
+      padding: 0.5em 2em;
+    }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="form-container">
+        <h2>Add New Shelter</h2>
+        <form th:action="@{/shelters/add}" method="post" th:object="${shelter}">
+            <div class="form-group">
+                <label for="shelterName">Shelter Name</label>
+                <input type="text" id="shelterName" name="shelterName" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="shelterCity">City</label>
+                <input type="text" id="shelterCity" name="shelterCity" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="shelterEmail">Email</label>
+                <input type="email" id="shelterEmail" name="shelterEmail" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="shelterAddress">Address</label>
+                <input type="text" id="shelterAddress" name="shelterAddress" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="shelterPhone1">Phone Number 1</label>
+                <input type="text" id="shelterPhone1" name="shelterPhones" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="shelterPhone2">Phone Number 2</label>
+                <input type="text" id="shelterPhone2" name="shelterPhones" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-primary">Add Shelter</button>
+        </form>
+    </div>
+</div>
+
+<footer class="text-white text-center py-3" style="height: 0vh;">
+    <div style="background-color: white; color: black;">
+        &copy; 2023 Paw Finder. All rights reserved.
+    </div>
+</footer>
+</body>
+</html>

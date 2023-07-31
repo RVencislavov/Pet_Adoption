@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Schedule a meeting</title>
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link rel="stylesheet" type="text/css"
+          href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <style>
+  body {
+    padding-top: 70px;
+}
+
+.fc-view {
+    width: 100%;
+    /* needed for view switching (when view is absolute) */
+    overflow: hidden;
+}
+
+ .fc-widget-header,
+ .fc-widget-content {
+    border: 1px solid #ddd;
+}
+
+ .fc-button {
+    position: relative;
+    display: inline-block;
+    padding: 0 .6em;
+    overflow: hidden;
+    height: 1.9em;
+    line-height: 1.9em;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+ body .calendar {
+    margin-bottom: 20px;
+}
+body .calendar .fc-header {
+    margin-bottom: 10px;
+}
+body .calendar .fc-header .fc-button-effect {
+    display: none;
+}
+body .calendar .fc-header .fc-header-left .fc-button, body .calendar .fc-header .fc-header-right .fc-button {
+    background: none;
+    border: none;
+}
+body .calendar .fc-header .fc-header-left .fc-button.fc-button-prev, body .calendar .fc-header .fc-header-right .fc-button.fc-button-prev {
+    background: center center !important;
+    text-indent: -9999px;
+    width: 36px;
+    height: 24px;
+    padding: 0;
+    opacity: 0.3;
+    filter: alpha(opacity=30);
+}
+
+body .calendar .fc-header .fc-header-left .fc-button.fc-button-next, body .calendar .fc-header .fc-header-right .fc-button.fc-button-next {
+    text-indent: -9999px;
+    background: url(../../img/styler/arrow-right.png) center center !important;
+    width: 36px;
+    height: 24px;
+    padding: 0;
+    opacity: 0.3;
+    filter: alpha(opacity=30);
+}
+
+ .animated {
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+.wobble {
+    -webkit-animation-name: wobble;
+    animation-name: wobble;
+}
+
+@-webkit-keyframes bounceInUp {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateY(2000px);
+        transform: translateY(2000px);
+    }
+    60% {
+        opacity: 1;
+        -webkit-transform: translateY(-30px);
+        transform: translateY(-30px);
+    }
+    80% {
+        -webkit-transform: translateY(10px);
+        transform: translateY(10px);
+    }
+    100% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+    }
+}
+
+.bounceInUp {
+    -webkit-animation-name: bounceInUp;
+    animation-name: bounceInUp;
+}
+
+
+
+
+/* Style for the time slot buttons */
+  .time-slots {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .time-slots li {
+    margin-bottom: 10px;
+  }
+
+  .time-slot-button {
+    display: block;
+    width: 100%;
+    padding: 5px 10px;
+    background-color: #eaeaea;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    /* Add the following styles to make the buttons visible */
+    color: #333;
+    font-size: 14px;
+    font-weight: bold;
+  }
+
+  .time-slot-button:hover {
+    background-color: #d4d4d4;
+  }
+
+    </style>
+
+</head>
+<head>
+    <link rel="stylesheet" type="text/css"
+          href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css">
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <div id="overview" class="col-sm-4 col-md-3 animated bounceInUp">
+            <h2>Schedule a meeting with:</h2>
+            <p>@ANIMALNAME</p>
+            <p>Please choose a suitable date and time from the available timeslots!</p>
+        </div>
+        <!-- End Column -->
+        <div id="calendar" class="col-sm-8 col-md-9 animated animated-sm bounceInUp">
+            <h2>Calendar </h2>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="calendar fc fc-ltr">
+                        <table class="fc-header" style="width:100%">
+                            <tbody>
+                            <tr>
+                                <td class="fc-header-left">
+                                    <div class="btn-group">
+                                        <button type="button"
+                                                class="fc-button-prev fc-corner-left btn btn-default btn-sm"><i
+                                                class="fa fa-chevron-left"></i>
+
+                                        </button>
+                                        <button type="button" class="btn btn-default btn-sm"><i
+                                                class="fa fa-chevron-right"></i>
+
+                                        </button>
+                                        <td class="fc-header-center"><span class="fc-header-title">          <h2>01.07 / 02.07 2023</h2>          </span>
+                                    </div>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div class="fc-content" style="position: relative; min-height: 1px;">
+                            <div class="fc-view fc-view-month fc-grid" style="position: relative; min-height: 1px;"
+                                 unselectable="on">
+                                <div style="position:absolute;z-index:8;top:0;left:0">
+                                    <div class="fc-event fc-event-hori fc-event-draggable fc-event-start fc-event-end ui-draggable"
+                                         style="position: absolute; z-index: 8; left: 495px; top: 60px;"
+                                         unselectable="on">
+
+                                    </div>
+                                    <div class="ui-resizable-handle ui-resizable-e"></div>
+                                </div>
+                                <div class="fc-event fc-event-hori fc-event-draggable fc-event-start"
+                                     style="position: absolute; z-index: 8; left: 804px; width: 304px; top: 352px;">
+                                    <div class="fc-event-inner"><span class="fc-event-title"
+                                                                      style="position:relative; left:18px; top:10px;font-size:20px;">5</span>
+
+                                    </div>
+                                </div>
+                                <div class="fc-event fc-event-hori fc-event-draggable fc-event-end"
+                                     style="position: absolute; z-index: 8; left: 20px; top: 470px;">
+                                    <div class="fc-event-inner"><span class="fc-event-title"
+                                                                      style="position:relative;left:17px;top:9px;font-size:20px;">2</span>
+
+                                    </div>
+                                    <div class="ui-resizable-handle ui-resizable-e"></div>
+                                </div>
+                                <div class="fc-event fc-event-hori fc-event-draggable fc-event-start fc-event-end"
+                                     style="position: absolute; z-index: 8; left: 306px; top: 265px;">
+                                    <div class="fc-event-inner"><span class="fc-event-title"
+                                                                      style="position:relative; top:11px; left:18px; font-size:20px;">2</span>
+
+                                    </div>
+                                    <div class="ui-resizable-handle ui-resizable-e"></div>
+                                </div>
+                            </div>
+                            <h5>Select an available time slot:</h5>
+                            <table class="fc-border-separate" style="width:100%" cellspacing="0">
+                                <thead>
+                                <tr class="fc-first fc-last">
+                                    <th class="fc-day-header fc-mon fc-widget-header" style="width: 158px;">Sat</th>
+                                    <th class="fc-day-header fc-tue fc-widget-header" style="width: 158px;">Sun</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        <ul class="time-slots">
+                                            <li>
+                                                <button class="time-slot-button">10:00-10:30
+                                                </button>
+                                            </li>
+                                            <li>
+                                                <button class="time-slot-button">11:00-11:30
+                                                </button>
+                                            </li>
+                                            <li>
+                                                <button class="time-slot-button">12:00-12:30
+                                                </button>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                    <td>
+                                        <ul class="time-slots">
+                                            <li>
+                                                <button class="time-slot-button">10:00-10:30
+                                                </button>
+                                            </li>
+                                            <li>
+                                                <button class="time-slot-button">11:00-11:30
+                                                </button>
+                                            </li>
+                                            <li>
+                                                <button class="time-slot-button">12:00-12:30
+                                                </button>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $(document).ready(function() {
+      $('.time-slot-button').click(function() {
+        alert('You have selected a time slot: ' + $(this).text());
+      });
+    });
+
+</script>
+</body>
+

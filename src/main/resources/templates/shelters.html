@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Roboto+Slab:400,700|Roboto:400,700&display=swap"
+          rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <style>
+    body {
+
+      background: linear-gradient(to bottom, #dbb263 0%, #f4edde 100%);
+      font-family: 'Roboto', sans-serif;
+      height: 100vh;
+      margin: 0;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+    .navbar {
+      background-color: #FAFAD2;
+    }
+    .navbar-brand {
+      font-size: 2em;
+      font-weight: bold;
+      color: #343a40;
+    }
+    .header-img {
+      border-radius: 50%;
+      height: 60px;
+      width: 60px;
+      object-fit: cover;
+    }
+    .navbar-nav .nav-link {
+      transition: color 0.5s;
+      color: #343a40;
+    }
+    .navbar-nav .nav-link:hover {
+      color: #f8f9fa;
+    }
+    h1 {
+      font-family: 'Roboto Slab', serif;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    }
+    .card {
+      border-radius: 20px;
+      box-shadow: 0 6px 10px -4px rgba(0, 0, 0, 0.15);
+      transition: all 0.3s;
+    }
+    .card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 16px -8px rgba(0, 0, 0, 0.4);
+    }
+    .card-title {
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style="height: 60px;">
+    <a class="navbar-brand" href="#">
+        <img src="/img/Logo2.png" alt="Logo" height="30" width="30" class="mr-2">
+        <span style="font-size: 20px;">Paw Finder</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/shelters/list}">Pet Adoption</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Lost and Found</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/showMap}">Veterinary Clinics</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/shelters">Shelters</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/animals/showAll">View Animals</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/users">Users</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav navbar-nav-buttons">
+            <li class="nav-item">
+                <a class="nav-link" href="/users/register">Register</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/users/login">Login</a>
+            </li>
+            <li class="nav-item dropdown show">
+                <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <div id="profilePicture" class="profile-picture"></div>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="profileDropdown">
+                    <a class="dropdown-item" href="#">Edit profile</a>
+                    <a class="dropdown-item" href="#">Logout</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container mt-5">
+    <h1 class="text-center mb-4">List of Shelters</h1>
+    <div class="row">
+        <!-- Iterate over the shelters and display their names as links -->
+        <div class="col-md-6 offset-md-3" th:each="shelter : ${shelters}">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <a th:href="@{/shelters/{id}/animals(id=${shelter.shelterID})}"
+                       th:text="${shelter.shelterName}"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer class="text-white text-center py-3" style="height: 0vh;">
+    <div style="background-color: white; color: black;">
+        &copy; 2023 Paw Finder. All rights reserved.
+    </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paw Finder - Edit Shelter</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <style>
+        body {
+            background-color: #f2f2f2;
+        }
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            margin-top: 50px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 4px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        form {
+            margin-top: 30px;
+        }
+        label {
+            font-weight: bold;
+        }
+        input[type="text"], input[type="email"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+        button[type="submit"] {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Edit User Roles</h1>
+    <form th:object="${user}" th:action="@{/users/{id}/roles(id=${id})}" method="post">
+        <div>
+            <label for="userFirstName">First Name:</label>
+            <p id="userFirstName" th:text="${user.userFirstName}"></p>
+        </div>
+        <div>
+            <label for="userLastName">Last Name:</label>
+            <p id="userLastName" th:text="${user.userLastName}"></p>
+        </div>
+        <div>
+            <label for="userEmail">Email:</label>
+            <p id="userEmail" th:text="${user.userEmail}"></p>
+        </div>
+        <div>
+            <label for="userPhone">Phone:</label>
+            <p id="userPhone" th:text="${user.userPhone}"></p>
+        </div>
+        <div>
+            <label for="roles">Roles:</label>
+            <select id="roles" th:field="*{authorities}" multiple="multiple">
+                <option th:each="roleEntity : ${allRoles}"
+                        th:value="${roleEntity.roleID}"
+                        th:text="${roleEntity.getAuthority()}"></option>
+            </select>
+        </div>
+        <button type="submit">Save</button>
+    </form>
+</div>
+<footer class="text-white text-center py-3" style="height: 0vh;">
+    <div style="background-color: white; color: black;">
+        &copy; 2023 Paw Finder. All rights reserved.
+    </div>
+</footer>
+</body>
+</html>

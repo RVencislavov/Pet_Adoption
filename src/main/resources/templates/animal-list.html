@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paw Finder - Animals List</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <style>
+        body {
+            background-color: #E3DAC9;
+        }
+
+        .navbar {
+            background-color: white;
+        }
+
+        .navbar-brand {
+            color: #343a40;
+        }
+
+        .navbar-brand img {
+            height: 30px;
+            width: 30px;
+            margin-right: 5px;
+        }
+
+        .navbar-nav .nav-link {
+            color: #343a40;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 30px;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+             background-color: #fff;
+        }
+
+        .table th,
+        .table td {
+            padding: 1rem;
+            border-top: none;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .table thead th {
+            background-color: #f5f5f5;
+            border-top: none;
+            border-bottom: 2px solid #dee2e6;
+        }
+
+        .table tbody tr:hover {
+          background-color: #E3DAC9;
+        color: #fff;
+        }
+
+        .table tbody td {
+            vertical-align: middle;
+        }
+
+        .btn-success {
+            background-color: #b08d57;
+            border-color: #b08d57;
+        }
+
+        .btn-success:hover {
+            background-color: #856b40;
+            border-color: #856b40;
+        }
+
+        .btn-primary {
+            background-color: #b08d57;
+            border-color: #b08d57;
+        }
+
+        .btn-primary:hover {
+            background-color: #856b40;
+            border-color: #856b40;
+        }
+
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style="height: 60px;">
+    <a class="navbar-brand" href="#">
+        <img src="/img/Logo2.png" alt="Logo" height="30" width="30" class="mr-2">
+        <span style="font-size: 20px;">Paw Finder</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/shelters/list}">Pet Adoption</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Lost and Found</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/showMap}">Veterinary Clinics</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/shelters">Shelters</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/animals/showAll">View Animals</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/users">Users</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav navbar-nav-buttons">
+            <li class="nav-item">
+                <a class="nav-link" href="/users/register">Register</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/users/login">Login</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+    <h1 class="text-center" style="color: #856b40;">Animals List</h1>
+
+    <a th:href="@{/animals/add}" class="btn btn-success mb-3">Add Animal</a>
+
+    <table class="table table-borderless">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Species</th>
+            <th scope="col">Gender</th>
+            <th scope="col">Age</th>
+            <th scope="col">Size Category</th>
+            <th scope="col">Characteristics</th>
+            <th scope="col">Is Adopted</th>
+            <th scope="col">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="animal : ${animals}">
+            <th scope="row" th:text="${animal.animalID}"></th>
+            <td th:text="${animal.animalName}"></td>
+            <td th:text="${animal.animalSpecies}"></td>
+            <td th:text="${animal.gender}"></td>
+            <td th:text="${animal.animalAge}"></td>
+            <td th:text="${animal.sizeCategory.category}"></td>
+            <td th:text="${animal.animalCharacteristics}"></td>
+            <td th:text="${animal.adopted}"></td>
+            <td>
+                <a th:href="@{/animals/{id}/edit(id=${animal.animalID})}" class="btn btn-primary">Edit</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+<footer class="text-white text-center py-3" style="height: 0vh;">
+    <div style="background-color: white; color: black;">
+        &copy; 2023 Paw Finder. All rights reserved.
+    </div>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
